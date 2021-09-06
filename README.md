@@ -18,7 +18,50 @@ See [this page](http://jagt.github.io/clumsy) for more info and build instructio
 
 Simulate network latency, delay, packet loss with clumsy on Windows 7/8/10:
 
-![](clumsy-demo.gif)
+![]()
+
+## Build
+
+### Prerequisites
+
+- Git
+- GENie - for build generation
+- An Editor or IDE - for debug builds and devlopment
+- MSYS2 - for release builds
+
+    Clone the repo
+    ```
+    git clone https://github.com/ibarhimcetin/clumsy.git
+    ```
+    Change directory
+    ```
+    cd clumsy
+    ```
+    Generate Makefile
+    ```
+    genie gmake
+    ```
+    Build
+    ```
+    make -C .\build config=debug64 all
+    ```
+    Exe will be in here
+    ```
+    .\bin\gmake\Debug\x64\clumsy.exe
+    ```
+
+## Usage
+
+You have to run terminal as administrator
+```
+clumsy.exe <filter> <function> <value> <run time>
+```
+
+### Usage Example
+This command will make 100ms lag for 30 seconds
+```
+clumsy.exe outbound lag 100 30
+```
 
 
 ## License
