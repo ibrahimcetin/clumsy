@@ -107,15 +107,28 @@ int main(int argc, char *argv[])
 
         if (strcmp(module->shortName, argv[2]) == 0)
         {
+            DWORD startTime = timeGetTime();
+            DWORD currentTime, currentRunTime;
+
             *(module->enabledFlag) = 1;
             startClumsy(filterText);
 
             int moduleValue = strtol(argv[3], NULL, 10);
             setModuleValue(ix, moduleValue);
 
-            short sleepTime = strtol(argv[4], NULL, 10);
-            int sleepTimeInMilli = sleepTime * 1000;
-            SleepEx(sleepTimeInMilli, 0);
+            DWORD runTime = strtol(argv[4], NULL, 10) * 1000;
+            while (1)
+            {
+                if (runTime)
+                {
+                    currentTime = timeGetTime();
+                    currentRunTime = currentTime - startTime;
+                    if (currentRunTime >= runTime)
+                        break;
+                }
+
+                SleepEx(1000, 0);
+            }
 
             divertStop();
 
