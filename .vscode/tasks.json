@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Clumsy",
+			"command": "make",
+			"args": [
+				"-C",
+				"./build",
+				"config=debug64",
+				"all"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		}
+	]
+}
