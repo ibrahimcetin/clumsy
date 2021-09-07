@@ -63,6 +63,7 @@ This command will make 100ms lag for 30 seconds
 clumsy.exe outbound lag 100 30
 ```
 
+If you want to run clumsy forever, you must set the `run time` to 0.
 
 ## License
 
