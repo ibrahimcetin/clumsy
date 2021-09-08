@@ -4,12 +4,6 @@
 
 MINGW_ACTION = 'gmake'
 
-if _ACTION == 'clean' then
-    os.rmdir('./build')
-    os.rmdir('./bin')
-    os.rmdir('./obj_' .. MINGW_ACTION)
-end
-
 if _ACTION == MINGW_ACTION then
     -- need a msys2 with clang
     premake.gcc.cc   = 'clang'
