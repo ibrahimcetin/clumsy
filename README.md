@@ -14,38 +14,46 @@ Leveraging the awesome [WinDivert](http://reqrypt.org/windivert.html), clumsy st
 See [this page](http://jagt.github.io/clumsy) for more info and build instructions.
 
 
-## Details
+## **Details**
 
 Simulate network latency, delay, packet loss with clumsy on Windows 7/8/10:
 
 ![]()
 
-## Build
+## **Build**
 
-### Prerequisites
+### **Prerequisites**
 
 - Git
 - GENie - for build generation
 - An Editor or IDE - for debug builds and devlopment
 - MSYS2 - for release builds
 
-    Clone the repo
+    **Clone the repo**
     ```
     git clone https://github.com/ibarhimcetin/clumsy.git
     ```
-    Change directory
+
+    **Change directory**
     ```
     cd clumsy
     ```
-    Generate Makefile
+
+    **Generate Makefile**
     ```
     genie gmake
     ```
-    Build
+
+    **Build**
     ```
-    make -C .\build config=debug64 all
+    make -C .\build
     ```
-    Exe will be in here
+    *Note:* This command will create an x64 debug exe file. If you want another build, you can check the help section with
+    ```
+    make -C .\build help
+    ```
+
+    **Exe will be in here**
     ```
     .\bin\gmake\Debug\x64\clumsy.exe
     ```
