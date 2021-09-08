@@ -18,7 +18,7 @@ if _ACTION == MINGW_ACTION then
     solution('clumsy')
         location("./build")
         configurations({'Debug', 'Release'})
-        platforms({'x32', 'x64'})
+        platforms({'x64', 'x32'})
 
         project('clumsy')
             language("C")
@@ -84,4 +84,3 @@ if _ACTION == MINGW_ACTION then
             set_bin(MINGW_ACTION, 'Release', "x32")
             set_bin(MINGW_ACTION, 'Release', "x64")
 end
-
