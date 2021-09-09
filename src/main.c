@@ -94,9 +94,10 @@ int main(int argc, char *argv[])
 
     BOOL exit = checkRequirements();
     if (exit)
-    {
-        return 0;
-    }
+        return 1;
+
+    if (argc != 5)
+        return 1; // TODO print help message
 
     char *filterText = argv[1];
 
