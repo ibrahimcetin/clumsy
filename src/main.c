@@ -115,6 +115,8 @@ int main(int argc, char *argv[])
             startClumsy(filterText);
 
             int moduleValue = strtol(argv[3], NULL, 10);
+            if (!strcmp(module->shortName, "drop") || !strcmp(module->shortName, "ood"))
+                moduleValue *= 100;
             setModuleValue(ix, moduleValue);
 
             DWORD runTime = strtol(argv[4], NULL, 10) * 1000;
