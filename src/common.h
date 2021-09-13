@@ -179,3 +179,11 @@ void endTimePeriod();
 BOOL IsElevated();
 BOOL IsRunAsAdmin();
 BOOL tryElevate(BOOL silent);
+
+typedef struct
+{
+    const char *name;
+    int value;
+} ModuleData;
+
+int parseArgs(int argc, char *argv[], char *filterText, ModuleData dataOfModules[MODULE_CNT], DWORD *runTimePointer);

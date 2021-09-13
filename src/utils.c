@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <Windows.h>
+#include <unistd.h>
 #include "common.h"
 
 short calcChance(short chance)
@@ -27,4 +28,39 @@ void endTimePeriod()
         timeEndPeriod(TIMER_RESOLUTION);
         resolutionSet = 0;
     }
+}
+
+int parseArgs(int argc, char *argv[], char *filterText, ModuleData dataOfModules[MODULE_CNT], DWORD *runTimePointer)
+{
+    int opt;
+
+    int moduleIndex = 0;
+    int valueIndex = 0;
+    while ((opt = getopt(argc, argv, ":f:m:v:")) != -1)
+    {
+        switch (opt)
+        {
+        case 'f':
+            strcpy(filterText, optarg);
+            break;
+        case 'm':
+            dataOfModules[moduleIndex] = (ModuleData){optarg, 0};
+            moduleIndex += 1;
+            break;
+        case 'v':
+            dataOfModules[valueIndex].value = strtol(optarg, NULL, 10);
+            valueIndex += 1;
+            break;
+        case ':':
+            printf("Option needs a value\n");
+            break;
+        case '?':
+            printf("Unknown option: %c\n", optopt);
+            break;
+        }
+    }
+
+    *runTimePointer = strtol(argv[optind], NULL, 10) * 1000;
+
+    return moduleIndex; // return number of modules
 }

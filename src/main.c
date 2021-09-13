@@ -80,12 +80,6 @@ static void startClumsy(char *filterText)
     LOG("Started filtering. Enable functionalities to take effect.");
 }
 
-void setModuleValue(UINT moduleIndex, short value)
-{
-    short *valuePointer = (modules[moduleIndex]->value);
-    InterlockedExchange16(valuePointer, (short)value);
-}
-
 int main(int argc, char *argv[])
 {
     LOG("Is Run As Admin: %d", IsRunAsAdmin());
@@ -96,48 +90,57 @@ int main(int argc, char *argv[])
     if (exit)
         return 1;
 
-    if (argc != 5)
-        return 1; // TODO print help message
+    ModuleData dataOfModules[MODULE_CNT];
+    char *filterText = malloc(sizeof(char) * 512);
+    DWORD runTime = 0;
+    DWORD *runTimePointer = &runTime;
 
-    char *filterText = argv[1];
+    int numberOfModules = parseArgs(argc, argv, filterText, dataOfModules, runTimePointer);
 
     UINT ix;
     for (ix = 0; ix < MODULE_CNT; ++ix)
     {
         Module *module = *(modules + ix);
 
-        if (strcmp(module->shortName, argv[2]) == 0)
+        int im;
+        for (im = 0; im < numberOfModules; im++)
         {
-            DWORD startTime = timeGetTime();
-            DWORD currentTime, currentRunTime;
+            ModuleData moduleData = dataOfModules[im];
 
-            *(module->enabledFlag) = 1;
-            startClumsy(filterText);
-
-            int moduleValue = strtol(argv[3], NULL, 10);
-            if (!strcmp(module->shortName, "drop") || !strcmp(module->shortName, "ood"))
-                moduleValue *= 100;
-            setModuleValue(ix, moduleValue);
-
-            DWORD runTime = strtol(argv[4], NULL, 10) * 1000;
-            while (1)
+            if (strcmp(module->shortName, moduleData.name) == 0)
             {
-                if (runTime)
+                if (moduleData.value > 0)
                 {
-                    currentTime = timeGetTime();
-                    currentRunTime = currentTime - startTime;
-                    if (currentRunTime >= runTime)
-                        break;
+                    *(module->enabledFlag) = 1;
+
+                    int moduleValue = moduleData.value;
+                    if (!strcmp(module->shortName, "drop") || !strcmp(module->shortName, "ood"))
+                        moduleValue *= 100;
+                    *(module->value) = moduleValue;
                 }
-
-                SleepEx(1000, 0);
             }
-
-            divertStop();
-
-            break;
         }
     }
+
+    DWORD startTime = timeGetTime();
+    DWORD currentTime, currentRunTime;
+
+    startClumsy(filterText);
+
+    while (1)
+    {
+        if (runTime)
+        {
+            currentTime = timeGetTime();
+            currentRunTime = currentTime - startTime;
+            if (currentRunTime >= runTime)
+                break;
+        }
+
+        SleepEx(1000, 0);
+    }
+
+    divertStop();
 
     return 0;
 }
