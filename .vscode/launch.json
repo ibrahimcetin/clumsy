@@ -10,10 +10,17 @@
             "request": "launch",
             "program": "${workspaceFolder}/bin/gmake/Debug/x64/clumsy.exe",
             "args": [
-                "outbound",
+                "-f",
+                "outbound and !loopback",
+                "-m",
                 "lag",
+                "-v",
                 "200",
-                "30"
+                "-m",
+                "drop",
+                "-v",
+                "20",
+                "10"
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
