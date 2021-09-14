@@ -75,7 +75,6 @@ if _ACTION == MINGW_ACTION then
                     postbuildcommands({
                         -- robocopy returns non 0 will fail make
                         'cp ' .. divert_lib .. "WinDivert* " .. subdir,
-                        'cp ' .. ROOT .. "/etc/config.txt " .. subdir,
                     })
             end
 
