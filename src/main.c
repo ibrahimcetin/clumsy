@@ -48,7 +48,7 @@ static int checkRequirements()
     exit = checkIsRunning();
     if (exit)
     {
-        LOG("Theres' already an instance of clumsy running.\nAborting");
+        printf("Theres' already an instance of clumsy running.\nAborting\n");
         return exit;
     }
 
@@ -56,7 +56,8 @@ static int checkRequirements()
     exit = check32RunningOn64();
     if (exit)
     {
-        LOG("You're running 32bit clumsy on 64bit Windows, which wouldn't work. Please use the 64bit clumsy version.\nAborting");
+        printf("You're running 32bit clumsy on 64bit Windows, which wouldn't work. "
+               "Please use the 64bit clumsy version.\nAborting\n");
         return exit;
     }
 #endif
@@ -64,7 +65,8 @@ static int checkRequirements()
     exit = tryElevate(TRUE);
     if (exit)
     {
-        LOG("Clumsy needs to be elevated to work. Run Terminal as Administrator.\nAborting");
+        printf("Clumsy needs to be elevated to work. "
+               "Run Terminal as Administrator.\nAborting\n");
         return exit;
     }
 
@@ -82,8 +84,8 @@ static void startClumsy(char *filterText)
 
 int main(int argc, char *argv[])
 {
-    LOG("Is Run As Admin: %d", IsRunAsAdmin());
-    LOG("Is Elevated: %d", IsElevated());
+    printf("Is Run As Admin: %d\n", IsRunAsAdmin());
+    printf("Is Elevated: %d\n", IsElevated());
     srand((unsigned int)time(NULL));
 
     BOOL exit = checkRequirements();
