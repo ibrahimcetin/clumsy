@@ -62,16 +62,24 @@ Simulate network latency, delay, packet loss with clumsy on Windows 7/8/10:
 
 You have to run terminal as administrator
 ```
-clumsy.exe <filter> <function> <value> <run time>
+clumsy.exe -f <filter> -m <module> -v <value> <run time>
 ```
 
 ### Usage Example
 This command will make 100ms lag for 30 seconds
 ```
-clumsy.exe outbound lag 100 30
+clumsy.exe -f "outbound and !loopback" -m "lag" -v "100" "30"
 ```
+`run time` is optional. If you want to run clumsy forever, do not set it.
 
-If you want to run clumsy forever, you must set the `run time` to 0.
+### Multi Module Usage Example
+Also, you can use more than one module at the same time. To do that, you can use a command like this
+```
+clumsy.exe -f "outbound" -m "lag" -v "320" -m "drop" -v "20"
+```
+The command above will make 320ms lag and drop with a 20% chance at the same time forever.
+
+***Important:*** Pay attention to the order of arguments.
 
 ## License
 
