@@ -52,15 +52,18 @@ int parseArgs(int argc, char *argv[], char *filterText, ModuleData dataOfModules
             valueIndex += 1;
             break;
         case ':':
-            printf("Option needs a value\n");
+            printf("Option needs a value: %c\n", optopt);
             break;
         case '?':
-            printf("Unknown option: %c\n", optopt);
+            printf("Unknown option: %c\n"
+                   "Please, check help section.\n",
+                   optopt);
+            exit(1);
             break;
         }
     }
 
     *runTimePointer = strtol(argv[optind], NULL, 10) * 1000;
 
-    return moduleIndex; // return number of modules
+    return moduleIndex == valueIndex ? moduleIndex : -1; // return number of modules
 }

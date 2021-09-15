@@ -93,11 +93,28 @@ int main(int argc, char *argv[])
         return 1;
 
     ModuleData dataOfModules[MODULE_CNT];
-    char *filterText = malloc(sizeof(char) * 512);
+    char filterText[512] = "";
     DWORD runTime = 0;
     DWORD *runTimePointer = &runTime;
 
     int numberOfModules = parseArgs(argc, argv, filterText, dataOfModules, runTimePointer);
+
+    if (strcmp(filterText, "") == 0)
+    {
+        printf("There is no filter.\nPlease, check help section.\n");
+        return 1;
+    }
+
+    if (numberOfModules == 0)
+    {
+        printf("There is no module.\nPlease, check help section.\n");
+        return 1;
+    }
+    else if (numberOfModules == -1)
+    {
+        printf("Please, check help section.\n");
+        return 1;
+    }
 
     UINT ix;
     for (ix = 0; ix < MODULE_CNT; ++ix)
