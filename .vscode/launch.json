@@ -8,6 +8,7 @@
             "type": "cppdbg",
             "name": "Run Clumsy",
             "request": "launch",
+            "preLaunchTask": "Build Clumsy: Debug",
             "program": "${workspaceFolder}/bin/gmake/Debug/x64/clumsy.exe",
             "args": [
                 "-f",
@@ -24,7 +25,6 @@
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
-            "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "gdb",

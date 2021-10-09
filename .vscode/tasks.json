@@ -2,7 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Build Clumsy",
+			"label": "Build Clumsy: Debug",
 			"command": "make",
 			"args": [
 				"-C",
