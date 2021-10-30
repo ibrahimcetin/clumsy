@@ -14,11 +14,9 @@ Leveraging the awesome [WinDivert](http://reqrypt.org/windivert.html), clumsy st
 See [this page](http://jagt.github.io/clumsy) for more info and build instructions.
 
 
-## **Details**
+## **This Fork**
 
-Simulate network latency, delay, packet loss with clumsy on Windows 7/8/10:
-
-![]()
+This is a fork of the original [jagt/clumsy](https://github.com/jagt/clumsy) to make clumsy a **command line app**.
 
 ## **Build**
 
@@ -58,26 +56,26 @@ Simulate network latency, delay, packet loss with clumsy on Windows 7/8/10:
     .\bin\gmake\Debug\x64\clumsy.exe
     ```
 
-## Usage
+## **Usage**
 
 You have to run terminal as administrator
 ```
 clumsy.exe -f <filter> -m <module> -v <value> <run time>
 ```
 
-### Usage Example
+### **Usage Example**
 This command will make 100ms lag for 30 seconds
 ```
 clumsy.exe -f "outbound and !loopback" -m "lag" -v "100" "30"
 ```
 `run time` is optional. If you want to run clumsy forever, do not set it.
 
-### Multi Module Usage Example
+### **Multi Module Usage Example**
 Also, you can use more than one module at the same time. To do that, you can use a command like this
 ```
-clumsy.exe -f "outbound" -m "lag" -v "320" -m "drop" -v "20"
+clumsy.exe -f "outbound" -m "lag" -v "320" -m "drop" -v "20" 120
 ```
-The command above will make 320ms lag and drop with a 20% chance at the same time forever.
+The command above will make 320ms lag and drop with a 20% chance at the same time for 120 seconds.
 
 ***Important:*** Pay attention to the order of arguments.
 
